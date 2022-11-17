@@ -1,0 +1,20 @@
+﻿<Window x:Class="Hospital_wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital_wpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="74*"/>
+            <RowDefinition Height="345*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="79,0,0,0" VerticalAlignment="Center" />
+        <Grid Grid.Row="0" Background="#FF888EF5">
+            <Image HorizontalAlignment="Left" Height="54" Margin="37,0,0,0" VerticalAlignment="Center" Width="97" Source="Photo/logo_hos.png"/>
+        </Grid>
+    </Grid>
+</Window>

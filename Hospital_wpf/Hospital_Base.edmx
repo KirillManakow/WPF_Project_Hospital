@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище P_Manakov_HospitalModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Chambers">
+          <Key>
+            <PropertyRef Name="Id_chambers" />
+          </Key>
+          <Property Name="Id_chambers" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Count_of_space" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id_Doctor" />
+          </Key>
+          <Property Name="Id_Doctor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Second_Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Job_ttitel" Type="varchar(max)" Nullable="false" />
+          <Property Name="age" Type="varchar(max)" Nullable="false" />
+          <Property Name="Work_experience" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="Id_patient" />
+          </Key>
+          <Property Name="Id_patient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Second_Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Age" Type="varchar(max)" Nullable="false" />
+          <Property Name="Status" Type="varchar(max)" Nullable="false" />
+          <Property Name="Start_Treatment" Type="varchar(max)" />
+          <Property Name="End_Treatment" Type="varchar(max)" />
+          <Property Name="Id_Treatment" Type="int" />
+          <Property Name="Id_Doctor" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Treatment">
+          <Key>
+            <PropertyRef Name="Id_Treatment" />
+          </Key>
+          <Property Name="Id_Treatment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Treatment_Time" Type="varchar(max)" Nullable="false" />
+          <Property Name="Type_Treatment" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type_of_Treatment">
+          <Key>
+            <PropertyRef Name="Id_Type_Treatment" />
+          </Key>
+          <Property Name="Id_Type_Treatment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_of_Treatment" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "43P_Manakov_Hospital.dbo.User" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Login" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Id_user" />
+          </Key>
+          <Property Name="Id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="varchar(max)" Nullable="false" />
+          <Property Name="Password" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Patient_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id_Doctor" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="Id_Doctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Type_of_Treatment">
+          <End Role="Type_of_Treatment" Type="Self.Type_of_Treatment" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_of_Treatment">
+              <PropertyRef Name="Id_Type_Treatment" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="Id_Treatment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Treatment_Type_of_Treatment">
+          <End Role="Type_of_Treatment" Type="Self.Type_of_Treatment" Multiplicity="1" />
+          <End Role="Treatment" Type="Self.Treatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_of_Treatment">
+              <PropertyRef Name="Id_Type_Treatment" />
+            </Principal>
+            <Dependent Role="Treatment">
+              <PropertyRef Name="Type_Treatment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище P_Manakov_HospitalModelContainer">
+          <EntitySet Name="Chambers" EntityType="Self.Chambers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Treatment" EntityType="Self.Treatment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_of_Treatment" EntityType="Self.Type_of_Treatment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [User].[Id_user] AS [Id_user], 
+    [User].[Login] AS [Login], 
+    [User].[Password] AS [Password]
+    FROM [dbo].[User] AS [User]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Patient_Doctor" Association="Self.FK_Patient_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Type_of_Treatment" Association="Self.FK_Patient_Type_of_Treatment">
+            <End Role="Type_of_Treatment" EntitySet="Type_of_Treatment" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Treatment_Type_of_Treatment" Association="Self.FK_Treatment_Type_of_Treatment">
+            <End Role="Type_of_Treatment" EntitySet="Type_of_Treatment" />
+            <End Role="Treatment" EntitySet="Treatment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="P_Manakov_HospitalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Chambers">
+          <Key>
+            <PropertyRef Name="Id_chambers" />
+          </Key>
+          <Property Name="Id_chambers" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Count_of_space" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id_Doctor" />
+          </Key>
+          <Property Name="Id_Doctor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Second_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Job_ttitel" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="age" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Work_experience" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_Doctor" FromRole="Doctor" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="Id_patient" />
+          </Key>
+          <Property Name="Id_patient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Second_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Age" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Start_Treatment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="End_Treatment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Treatment" Type="Int32" />
+          <Property Name="Id_Doctor" Type="Int32" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Patient_Doctor" FromRole="Patient" ToRole="Doctor" />
+          <NavigationProperty Name="Type_of_Treatment" Relationship="Self.FK_Patient_Type_of_Treatment" FromRole="Patient" ToRole="Type_of_Treatment" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Treatment">
+          <Key>
+            <PropertyRef Name="Id_Treatment" />
+          </Key>
+          <Property Name="Id_Treatment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Treatment_Time" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type_Treatment" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Type_of_Treatment" Relationship="Self.FK_Treatment_Type_of_Treatment" FromRole="Treatment" ToRole="Type_of_Treatment" />
+        </EntityType>
+        <EntityType Name="Type_of_Treatment">
+          <Key>
+            <PropertyRef Name="Id_Type_Treatment" />
+          </Key>
+          <Property Name="Id_Type_Treatment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_of_Treatment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_Type_of_Treatment" FromRole="Type_of_Treatment" ToRole="Patient" />
+          <NavigationProperty Name="Treatment" Relationship="Self.FK_Treatment_Type_of_Treatment" FromRole="Type_of_Treatment" ToRole="Treatment" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Login" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Id_user" />
+          </Key>
+          <Property Name="Id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Patient_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id_Doctor" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="Id_Doctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Type_of_Treatment">
+          <End Role="Type_of_Treatment" Type="Self.Type_of_Treatment" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_of_Treatment">
+              <PropertyRef Name="Id_Type_Treatment" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="Id_Treatment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Treatment_Type_of_Treatment">
+          <End Role="Type_of_Treatment" Type="Self.Type_of_Treatment" Multiplicity="1" />
+          <End Role="Treatment" Type="Self.Treatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_of_Treatment">
+              <PropertyRef Name="Id_Type_Treatment" />
+            </Principal>
+            <Dependent Role="Treatment">
+              <PropertyRef Name="Type_Treatment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Chambers" EntityType="Self.Chambers" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Treatment" EntityType="Self.Treatment" />
+          <EntitySet Name="Type_of_Treatment" EntityType="Self.Type_of_Treatment" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Patient_Doctor" Association="Self.FK_Patient_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Type_of_Treatment" Association="Self.FK_Patient_Type_of_Treatment">
+            <End Role="Type_of_Treatment" EntitySet="Type_of_Treatment" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Treatment_Type_of_Treatment" Association="Self.FK_Treatment_Type_of_Treatment">
+            <End Role="Type_of_Treatment" EntitySet="Type_of_Treatment" />
+            <End Role="Treatment" EntitySet="Treatment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище P_Manakov_HospitalModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Chambers">
+            <EntityTypeMapping TypeName="P_Manakov_HospitalModel.Chambers">
+              <MappingFragment StoreEntitySet="Chambers">
+                <ScalarProperty Name="Id_chambers" ColumnName="Id_chambers" />
+                <ScalarProperty Name="Count_of_space" ColumnName="Count_of_space" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctor">
+            <EntityTypeMapping TypeName="P_Manakov_HospitalModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="Id_Doctor" ColumnName="Id_Doctor" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Second_Name" ColumnName="Second_Name" />
+                <ScalarProperty Name="Job_ttitel" ColumnName="Job_ttitel" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="Work_experience" ColumnName="Work_experience" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patient">
+            <EntityTypeMapping TypeName="P_Manakov_HospitalModel.Patient">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="Id_patient" ColumnName="Id_patient" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Second_Name" ColumnName="Second_Name" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Start_Treatment" ColumnName="Start_Treatment" />
+                <ScalarProperty Name="End_Treatment" ColumnName="End_Treatment" />
+                <ScalarProperty Name="Id_Treatment" ColumnName="Id_Treatment" />
+                <ScalarProperty Name="Id_Doctor" ColumnName="Id_Doctor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="P_Manakov_HospitalModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Treatment">
+            <EntityTypeMapping TypeName="P_Manakov_HospitalModel.Treatment">
+              <MappingFragment StoreEntitySet="Treatment">
+                <ScalarProperty Name="Id_Treatment" ColumnName="Id_Treatment" />
+                <ScalarProperty Name="Treatment_Time" ColumnName="Treatment_Time" />
+                <ScalarProperty Name="Type_Treatment" ColumnName="Type_Treatment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_of_Treatment">
+            <EntityTypeMapping TypeName="P_Manakov_HospitalModel.Type_of_Treatment">
+              <MappingFragment StoreEntitySet="Type_of_Treatment">
+                <ScalarProperty Name="Id_Type_Treatment" ColumnName="Id_Type_Treatment" />
+                <ScalarProperty Name="Name_of_Treatment" ColumnName="Name_of_Treatment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="P_Manakov_HospitalModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="798298653afe4e109e24e22fbc7a3783" Name="Diagram1">
+        <EntityTypeShape EntityType="P_Manakov_HospitalModel.Chambers" Width="1.5" PointX="5.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="P_Manakov_HospitalModel.Doctor" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="P_Manakov_HospitalModel.Patient" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="P_Manakov_HospitalModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="P_Manakov_HospitalModel.Treatment" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="P_Manakov_HospitalModel.Type_of_Treatment" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="P_Manakov_HospitalModel.User" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="P_Manakov_HospitalModel.FK_Patient_Doctor" ManuallyRouted="false" />
+        <AssociationConnector Association="P_Manakov_HospitalModel.FK_Patient_Type_of_Treatment" ManuallyRouted="false" />
+        <AssociationConnector Association="P_Manakov_HospitalModel.FK_Treatment_Type_of_Treatment" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
