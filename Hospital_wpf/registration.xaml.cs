@@ -16,20 +16,13 @@ using System.Windows.Shapes;
 namespace Hospital_wpf
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для registration.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class registration : Page
     {
-        public MainWindow()
+        public registration()
         {
             InitializeComponent();
-            MainFrame.Navigate(new avtorizacia(MainFrame));
-            Manager.MainFrame = MainFrame;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
     }
 }

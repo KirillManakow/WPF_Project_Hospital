@@ -8,13 +8,20 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="74*"/>
-            <RowDefinition Height="345*"/>
-            <RowDefinition Height="15*"/>
+            <RowDefinition Height="37*"/>
+            <RowDefinition Height="167*"/>
+            <RowDefinition Height="13*"/>
         </Grid.RowDefinitions>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="79,0,0,0" VerticalAlignment="Center" />
+        <Label Content="Label" HorizontalAlignment="Left" Margin="79,0,0,0" VerticalAlignment="Center" Height="26" Width="38" />
         <Grid Grid.Row="0" Background="#FF888EF5">
             <Image HorizontalAlignment="Left" Height="54" Margin="37,0,0,0" VerticalAlignment="Center" Width="97" Source="Photo/logo_hos.png"/>
+            <Label Content="Вива Клиника" HorizontalAlignment="Left" Margin="99,0,0,0" VerticalAlignment="Center" FontSize="18"/>
+            <Button Content="Exit" HorizontalAlignment="Left" Margin="701,0,0,0" VerticalAlignment="Center" FontSize="18" FontFamily="Bahnschrift" Width="53" Click="Button_Click"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Frame Grid.Row="1" NavigationUIVisibility="Hidden" Name="MainFrame"></Frame>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1"  Background="#FF888EF5">
         </Grid>
     </Grid>
 </Window>
