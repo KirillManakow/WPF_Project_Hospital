@@ -31,5 +31,12 @@ namespace Hospital_wpf
         {
             fram_reg.Navigate(new registration());
         }
+        List<Hospital_wpf.User> users = new List<Hospital_wpf.User>();  
+        private void vxod(object sender, RoutedEventArgs e)
+        {
+            string klients = Login.Text;
+            string pas = Parol.Text;
+            int count = Entities.GetContext().User.Count()
+        }
     }
 }

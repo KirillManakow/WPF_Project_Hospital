@@ -15,6 +15,7 @@ namespace Hospital_wpf
     
     public partial class Entities : DbContext
     {
+        private static Entities _instance;
         public Entities()
             : base("name=Entities")
         {
@@ -30,6 +31,13 @@ namespace Hospital_wpf
         public virtual DbSet<Patient> Patient { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Treatment> Treatment { get; set; }
+
+        internal static object GetContext()
+        {
+            if (_instance == null) _instance = new Entities();
+            return _instance;
+        }
+
         public virtual DbSet<Type_of_Treatment> Type_of_Treatment { get; set; }
         public virtual DbSet<User> User { get; set; }
     }
